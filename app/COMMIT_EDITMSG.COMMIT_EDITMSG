@@ -1,0 +1,70 @@
+ Server cleaning
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/.gitignore b/.gitignore
+index b4d9f79..e463ca1 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -4,4 +4,4 @@ app/public/.tmp
+ .sass-cache
+ app/public/components
+ .DS_Store
+-
++app/.public
+\ No newline at end of file
+diff --git a/app/server.js b/app/server.js
+index 2164177..a325555 100644
+--- a/app/server.js
++++ b/app/server.js
+@@ -2,21 +2,19 @@
+ /**
+  * Module dependencies.
+  */
+-
+-var express = require('express')
+-  , routes = require('./routes')
+-  , user = require('./routes/user')
+-  , http = require('http')
+-  , path = require('path');
++var express = require('express'),
++  routes = require('./routes'),
++  user = require('./routes/user'),
++  http = require('http'),
++  path = require('path');
+ var app = express();
+ 
+-
+-
+-console.log('Server in fase di config');
++/**
++ * App configuration
++ */
+ app.configure(function(){
+   // app.set('port', process.env.PORT || 3000);
+   app.set('views', __dirname + '/views');
+-  app.set('view engine', 'jade');
+   app.use(express.favicon());
+   app.use(express.logger('dev'));
+   app.use(express.bodyParser());
+@@ -29,17 +27,7 @@ app.configure('development', function(){
+   app.use(express.errorHandler());
+ });
+ 
+-app.get('/users', user.list);
+-app.get('/prova', function(req,res){
+-  res.send('ciaoooooooo');
+-
+-});
+-
+-
+-var server = http.createServer(app)
+-
+-
+-
++var server = http.createServer(app);
+ exports = module.exports = server;
+ 
+ exports.use = function() {
