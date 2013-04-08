@@ -1,5 +1,5 @@
 {
-  "name": "puppa",
+  "name": "dashboard",
   "version": "0.0.0",
   "dependencies": {
     "express": "3.0.5",
@@ -29,7 +29,8 @@
     "grunt-ngmin": "~0.0.1",
     "grunt-express": "*",
     "grunt-rerun": "0.0.2",
-    "orm": "*"
+    "mysql": "2.0.0-alpha7",
+    "q": "*"
   },
   "engines": {
     "node": ">=0.8.0"

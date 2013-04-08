@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('puppaApp')
+angular.module('publicApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

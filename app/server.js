@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -6,14 +5,15 @@ var express = require('express'),
   routes = require('./routes'),
   user = require('./routes/user'),
   http = require('http'),
-  orm = require('orm'),
+  mysql = require('mysql'),
   path = require('path');
+
 var app = express();
 
 /**
  * App configuration
  */
-app.configure(function(){
+app.configure(function() {
   // app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.use(express.favicon());
@@ -24,9 +24,11 @@ app.configure(function(){
 
 });
 
-app.configure('development', function(){
+app.configure('development', function() {
   app.use(express.errorHandler());
 });
+
+app.get('/users', user.list);
 
 
 var server = http.createServer(app);

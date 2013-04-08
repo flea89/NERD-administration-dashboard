@@ -1,1 +1,176 @@
+$navbarCollapseWidth: 500px !default;
+$sideBarAnimationSpeed: 0.3s;
+$navbarHeight: 50px;
+$background: #fdfdfe; 
+$bodyBackground: $background;
 @import "compass_twitter_bootstrap";
+
+$sidebarBackgroundTop: #3c3d47 url(/images/background.png);
+$sidebarBackgroundMain: #3c3d47;
+$backgroundColor : #222;
+
+$topBtnWidth: 40px;
+body{
+    // margin-top: $navbarHeight;
+    overflow-x: hidden;
+    width: 100%;
+    margin:0px !important;
+    padding: 0px !important;
+}
+
+@import "compass_twitter_bootstrap_responsive";
+
+ // NAVIGATION
+.sidebar{
+    position: fixed;
+    left: 0px;
+    bottom:0px;
+    top: 0px;
+    margin-left: 0px !important;
+    background: $sidebarBackgroundMain;
+    z-index: 1;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: $sideBarAnimationSpeed;
+}
+
+.sidebarOpen{
+
+    width: $gridColumnWidth * 4;
+}
+
+.sidebarClose {
+    width: 0px;
+}
+
+.myContainer{
+    -webkit-transition-property: all;
+    -webkit-transition-duration: $sideBarAnimationSpeed;
+    padding: 0px 10px 0 0px;
+    height: 100%;
+    overflow-y: scroll;
+    background: $background;
+    
+}
+
+.containerSideClose{
+    margin-left: 0px;
+}
+
+.containerSideOpen{
+    margin-left: $gridColumnWidth * 4;
+    overflow-x: hidden;
+}
+
+
+.sidebarTop{
+    a.brand > img{
+        height: 20px;
+    }
+    .settings{
+            position: absolute;
+            right: 10px;
+            // left: $gridColumnWidth * 4 - 3 *  $topBtnWidth - 15px;
+
+            // -webkit-transition-property: all;
+            // -webkit-transition-duration: 0.2s;
+
+        .btn{
+            background: url('./../images/buttonSettings.png');
+            height: 21px;
+            width: 10px;
+            border-top: 0px;
+        }
+
+        .btn:hover{
+            background: url('./../images/buttonSettingsHover.png');
+            border-top: 0px;
+        }
+    }
+}
+
+
+
+@media (min-width: 1200px){
+    .sidebarOpen{
+        width: $gridColumnWidth1200 * 4;
+    }
+
+    .containerSideOpen{
+        margin-left: $gridColumnWidth1200 * 4;
+    }
+
+}
+
+@media (max-width: 979px) and (min-width: 768px){
+    .sidebarOpen{
+        width: $gridColumnWidth768 * 6 !important;
+    }
+    .containerSideOpen{
+        margin-left: $gridColumnWidth768 * 6;
+    }
+    
+
+}
+
+@media (max-width: 767px){
+    .sidebarOpen{
+        width: 80% !important;
+    }
+
+    .containerSideOpen{
+        position: fixed;
+        left: 80%;
+        width: 100% !important;
+        margin-left: 0px;
+    }
+    .containerSideClose{
+        position: fixed;
+        left: 0px;
+        width: 100% !important;
+    }
+
+}
+
+
+.box{
+}
+
+.sidebarTop{
+    -webkit-transition-property: width;
+    -webkit-transition-duration: $sideBarAnimationSpeed;
+    overflow: hidden;
+    .navbar-inner{
+        background: $sidebarBackgroundTop;
+        border-top: none;
+        border-left: none;
+        padding: 0px 12px 0px 12px;
+        border-bottom: 1px solid rgba(0,0,0,0.5);
+        -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+}
+
+.topbar-icon{
+    display: block;
+    background: url('./../images/topbar-icon.png');
+    width: 28px;
+    height: 20px;
+}
+
+
+//TOPNAVBAR
+.myContainer > .navbar {
+    position:fixed;
+    width:100%;
+    z-index: 10;
+}
+
+
+
+.content {
+    padding: 60px 30px 0px 30px;
+}
+
+
+

@@ -1,5 +1,5 @@
 {
-  "name": "puppa",
+  "name": "public",
   "version": "0.0.0",
   "appPath": "app/public",
   "testPath": "test/client/spec",
@@ -9,7 +9,8 @@
     "es5-shim": "~2.0.5",
     "angular-resource": "~1.0.5",
     "angular-cookies": "~1.0.5",
-    "angular-sanitize": "~1.0.5"
+    "angular-sanitize": "~1.0.5",
+    "jquery": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
