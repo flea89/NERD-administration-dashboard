@@ -4,18 +4,24 @@ $navbarHeight: 50px;
 $background: #fdfdfe; 
 $bodyBackground: $background;
 @import "compass_twitter_bootstrap";
-
 $sidebarBackgroundTop: #3c3d47 url(/images/background.png);
 $sidebarBackgroundMain: #3c3d47;
 $backgroundColor : #222;
 
 $topBtnWidth: 40px;
+html{
+    height: 100%;
+}
 body{
     // margin-top: $navbarHeight;
     overflow-x: hidden;
     width: 100%;
+    height: 100%;
     margin:0px !important;
     padding: 0px !important;
+    background: url(../images/bg.jpg) repeat;
+    filter: none;
+    color: $textColor;
 }
 
 @import "compass_twitter_bootstrap_responsive";
@@ -48,7 +54,11 @@ body{
     padding: 0px 10px 0 0px;
     height: 100%;
     overflow-y: scroll;
-    background: $background;
+    -webkit-box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+    -moz-box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+    box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+    background: url(../images/bg.jpg) repeat;
+    filter: none;
     
 }
 
@@ -122,11 +132,13 @@ body{
         left: 80%;
         width: 100% !important;
         margin-left: 0px;
+        -webkit-overflow-scrolling: touch;
     }
     .containerSideClose{
         position: fixed;
         left: 0px;
         width: 100% !important;
+        -webkit-overflow-scrolling: touch;
     }
 
 }
@@ -170,7 +182,64 @@ body{
 
 .content {
     padding: 60px 30px 0px 30px;
+    // -webkit-box-shadow: -3px -1px 2px rgba(0,0,0,0.95);
+    // -moz-box-shadow: -3px -1px 2px rgba(0,0,0,0.95);
+    // box-shadow: -3px -1px 2px rgba(0,0,0,0.95);
+    // background: url(../images/bg.jpg) repeat;
+    // filter: none;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    text-align: center;
+
+}
+.graph-box {
+background: none repeat scroll 0 0 #F9F9F9;
+border: 1px solid #CDCDCD;
+clear: both;
+margin-top: 16px;
+margin-bottom: 16px;
+position: relative;
+margin: 12px 41px 10px 0px;
+width: 100%;
+
 }
 
+.graph-title {
+background-color: #efefef;
+background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#fdfdfd), to(#eaeaea));
+background-image: -webkit-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+background-image: -moz-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+background-image: -ms-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+background-image: -o-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+background-image: -linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', endColorstr='#eaeaea',GradientType=0 );
+border-bottom: 1px solid #CDCDCD;
+height: 36px;
+line-height: 36px;
+}
 
+.chart{
+    width: 100%;
+    // padding-right: 20px;
+    // box-sizing: border-box;
+}
+
+.text-title{
+font-size: 22px;
+line-height: 30px;
+float: left;
+margin-top: 2px;
+margin-left: 15px; 
+color: #646464;
+font-weight: normal;
+text-shadow: 0px 1px 0px #fff;
+}
+
+.navigationControls{
+    float: right;
+}
+.visualizationControls{
+    margin-left: 30px;
+}
 

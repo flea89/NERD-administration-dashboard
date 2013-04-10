@@ -14,6 +14,7 @@ var app = express();
  * App configuration
  */
 app.configure(function() {
+  'use strict';
   // app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.use(express.favicon());

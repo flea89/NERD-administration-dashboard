@@ -6156,12 +6156,21 @@ a.label:hover, a.badge:hover {
   box-sizing: border-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000313}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000312}}
+html {
+  height: 100%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000315}}
 body {
   overflow-x: hidden;
   width: 100%;
+  height: 100%;
   margin: 0px !important;
   padding: 0px !important;
+  background: url(../images/bg.jpg) repeat;
+  filter: none;
+  color: #333333;
 }
 
 /*
@@ -7530,7 +7539,7 @@ body {
     overflow: visible !important;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000324}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000330}}
 .sidebar {
   position: fixed;
   left: 0px;
@@ -7543,109 +7552,115 @@ body {
   -webkit-transition-duration: 0.3s;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000336}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000342}}
 .sidebarOpen {
   width: 240px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000341}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000347}}
 .sidebarClose {
   width: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000345}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000351}}
 .myContainer {
   -webkit-transition-property: all;
   -webkit-transition-duration: 0.3s;
   padding: 0px 10px 0 0px;
   height: 100%;
   overflow-y: scroll;
-  background: #fdfdfe;
+  -webkit-box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+  -moz-box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+  box-shadow: -3px -1px 2px rgba(0, 0, 0, 0.95);
+  background: url(../images/bg.jpg) repeat;
+  filter: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000355}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000365}}
 .containerSideClose {
   margin-left: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000359}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000369}}
 .containerSideOpen {
   margin-left: 240px;
   overflow-x: hidden;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000366}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000376}}
 .sidebarTop a.brand > img {
   height: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000379}}
 .sidebarTop .settings {
   position: absolute;
   right: 10px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000377}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000387}}
 .sidebarTop .settings .btn {
   background: url("./../images/buttonSettings.png");
   height: 21px;
   width: 10px;
   border-top: 0px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000394}}
 .sidebarTop .settings .btn:hover {
   background: url("./../images/buttonSettingsHover.png");
   border-top: 0px;
 }
 
 @media (min-width: 1200px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003104}}
   .sidebarOpen {
     width: 280px;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003108}}
   .containerSideOpen {
     margin-left: 280px;
   }
 }
 @media (max-width: 979px) and (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003105}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003115}}
   .sidebarOpen {
     width: 252px !important;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003118}}
   .containerSideOpen {
     margin-left: 252px;
   }
 }
 @media (max-width: 767px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003126}}
   .sidebarOpen {
     width: 80% !important;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003130}}
   .containerSideOpen {
     position: fixed;
     left: 80%;
     width: 100% !important;
     margin-left: 0px;
+    -webkit-overflow-scrolling: touch;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003126}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003137}}
   .containerSideClose {
     position: fixed;
     left: 0px;
     width: 100% !important;
+    -webkit-overflow-scrolling: touch;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003150}}
 .sidebarTop {
   -webkit-transition-property: width;
   -webkit-transition-duration: 0.3s;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003142}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003154}}
 .sidebarTop .navbar-inner {
   background: #3c3d47 url(/images/background.png);
   border-top: none;
@@ -7656,7 +7671,7 @@ body {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003154}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003166}}
 .topbar-icon {
   display: block;
   background: url("./../images/topbar-icon.png");
@@ -7664,14 +7679,72 @@ body {
   height: 20px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003163}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003175}}
 .myContainer > .navbar {
   position: fixed;
   width: 100%;
   z-index: 10;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003171}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003183}}
 .content {
   padding: 60px 30px 0px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  text-align: center;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003196}}
+.graph-box {
+  background: none repeat scroll 0 0 #f9f9f9;
+  border: 1px solid #cdcdcd;
+  clear: both;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  margin: 12px 41px 10px 0px;
+  width: 100%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003208}}
+.graph-title {
+  background-color: #efefef;
+  background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#fdfdfd), to(#eaeaea));
+  background-image: -webkit-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -moz-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -ms-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -o-linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  background-image: -linear-gradient(top, #fdfdfd 0%, #eaeaea 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fdfdfd', endColorstr='#eaeaea',GradientType=0 );
+  border-bottom: 1px solid #cdcdcd;
+  height: 36px;
+  line-height: 36px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003222}}
+.chart {
+  width: 100%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003228}}
+.text-title {
+  font-size: 22px;
+  line-height: 30px;
+  float: left;
+  margin-top: 2px;
+  margin-left: 15px;
+  color: #646464;
+  font-weight: normal;
+  text-shadow: 0px 1px 0px white;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003239}}
+.navigationControls {
+  float: right;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/paolo\/workspace\/dashboard\/app\/public\/styles\/main\.scss}line{font-family:\00003242}}
+.visualizationControls {
+  margin-left: 30px;
 }

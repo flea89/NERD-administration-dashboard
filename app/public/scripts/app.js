@@ -1,11 +1,11 @@
 'use strict';
 
 google.setOnLoadCallback(function() {
-    angular.bootstrap(document.body, ['publicApp','ngResource']);
+    angular.bootstrap(document.body, ['publicApp', 'ngResource']);
 });
 
 google.load('visualization', '1', {
-    packages: ['corechart','annotatedtimeline']
+    packages: ['corechart', 'annotatedtimeline', 'geochart']
 });
 
 

@@ -1,45 +1,32 @@
+<hr>
+<h2>Users Statistics</h2>
+<hr>
 
-            <div id="graph" class="span6 box">
-                <timeline data="data"></timeline>
-            </div>
-            <div class="span6 box">
+<div class="row-fluid">
+    <div class="span12 ">
+        <timeline data="data" changev="setData(visualization)" title='The number of Users' collapse></timeline>
 
-            </div>
-        <div class="row-fluid">
-            <div class="span6 box">
+    </div>
 
-            </div>
-            <div class="span6 box">
+</div>
+<div class="row-fluid">
+    <div class="span6 box">
+        <piechart title='Users by Country' data="pieDataCountry"collapse></piechart>
 
-            </div>
+    </div>
+    <div class="span6 box">
+        <piechart title='Users by Language' data="pieDataLanguage"collapse></piechart>
+    </div>
 
-        </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 box">
+        <geochart title='Users by Country' data="geoDataCountry" collapse></geochart>
 
-        <div class="row-fluid">
-            <div class="span6 box">
-
-            </div>
-            <div class="span6 box">
-
-            </div>
-            
-        </div>
-        <div class="row-fluid">
-            <div class="span6 box">
-
-            </div>
-            <div class="span6 box">
-
-            </div>
-            
-        </div>
-        <div class="row-fluid">
-            <div class="span6 box">
-
-            </div>
-            <div class="span6 box">
-
-            </div>
-            
-        </div>
-{{data.array}}
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12 box">
+        <timeline data="dataFilter" changev="setDataFiltered(visualization)" title='The number of Users' collapse></timeline>
+    </div>
+</div>
