@@ -8,7 +8,8 @@ angular.module('publicApp')
             data: '=',
             title: '@',
             changev: '&',
-            options: '@'
+            options: '@',
+            multiline: '@'
         },
         template: ['<div class="graph-box">',
             '<div class="graph-title"><span class="text-title">{{title}}</span>',
@@ -82,6 +83,7 @@ angular.module('publicApp')
                     data = new google.visualization.DataTable();
                     data.addColumn('date', 'Date');
                     data.addColumn('number', 'Registration');
+                    data.addColumn('number', 'Registration2');
                     scope.data[scope.indexTimeView].array.forEach(function(el) {
                         data.addRow(el);
                     });
@@ -120,8 +122,8 @@ angular.module('publicApp')
                 var controls = {
                     prev: function() {
                         scope.indexTimeView -= 1;
-                        if (scope.indexTimeView < 2) {
-                            scope.indexTimeView = 1;
+                        if (scope.indexTimeView < 1) {
+                            scope.indexTimeView = 0;
                         }
                         return scope.data[scope.indexTimeView];
                     },
@@ -136,6 +138,7 @@ angular.module('publicApp')
                 data = new google.visualization.DataTable();
                 data.addColumn('date', 'Date');
                 data.addColumn('number', 'Registration');
+                data.addColumn('number', 'Registration2');
 
                 controls[$(event.target).html()]().array.forEach(function(el) {
                     data.addRow(el);
@@ -150,7 +153,7 @@ angular.module('publicApp')
 
                 navigationControls.succ.removeClass('disabled');
                 navigationControls.prev.removeClass('disabled');
-                if (scope.indexTimeView < 2) {
+                if (scope.indexTimeView < 1) {
                     navigationControls.prev.addClass('disabled');
 
                 }
@@ -182,6 +185,7 @@ angular.module('publicApp')
                     data = new google.visualization.DataTable();
                     data.addColumn('date', 'Date');
                     data.addColumn('number', 'Registration');
+                    data.addColumn('number', 'Registration2');
                     scope.data[scope.indexTimeView].array.forEach(function(el) {
                         data.addRow(el);
                     });
@@ -197,6 +201,7 @@ angular.module('publicApp')
                     data = new google.visualization.DataTable();
                     data.addColumn('date', 'Date');
                     data.addColumn('number', 'Registration');
+                    data.addColumn('number', 'Registration2');
                     scope.data[scope.indexTimeView].array.forEach(function(el) {
                         data.addRow(el);
                     });

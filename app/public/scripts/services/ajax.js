@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('publicApp')
-    .factory('ajax', function($resource) {
+    .factory('ajax', function($resource, $q) {
     var ajax = $resource('/users');
 
     function getFriday(weekNum, year) {
@@ -44,7 +44,8 @@ angular.module('publicApp')
             }
 
         },
-        returnData = [];
+        returnData = [],
+            defer = $q.defer();
 
 
         if (returnData.length < 1) {
@@ -53,7 +54,7 @@ angular.module('publicApp')
                 timeAggregator: aggregation,
             };
 
-            if (filter) {
+            if (filter && filter.length > 0) {
                 ajaxReq.filters = JSON.stringify(filter);
             }
 
@@ -63,7 +64,9 @@ angular.module('publicApp')
 
                 function reduceDates(prev, curr) {
                     if (prev[aggregationConfig[aggregation].range] !== curr[aggregationConfig[aggregation].range]) {
-                        returnData.push(group);
+                        if (group) {
+                            returnData.push(group);
+                        }
                         group = {
                             title: curr[aggregationConfig[aggregation].range],
                             array:   [
@@ -83,6 +86,7 @@ angular.module('publicApp')
                 if (typeof success === 'function') {
                     success(res);
                 }
+                defer.resolve(returnData);
             },
 
             function() {
@@ -90,13 +94,15 @@ angular.module('publicApp')
                 if (typeof fail === 'function') {
                     fail();
                 }
+                defer.reject('UserQueryError');
             });
-            return returnData;
+
+            return defer.promise;
         } else {
             if (typeof success === 'function') {
                 success();
             }
-            return returnData;
+            return defer.promise;
         }
     }
 

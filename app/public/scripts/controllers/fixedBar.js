@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('publicApp')
-    .controller('FixedBarCtrl', function($scope, ajax) {
+    .controller('FixedBarCtrl', function($scope, ajax, $q) {
     $scope.data = [];
-    $scope.data = ajax.getUsersTimeLine('day');
+    ajax.getUsersTimeLine('day').then(function(result) {
+        $scope.data = result;
+    });
     $scope.pieDataCountry = ajax.getUsersGroupBy('country');
     $scope.pieDataLanguage = ajax.getUsersGroupBy('language');
 
@@ -16,29 +18,38 @@ angular.module('publicApp')
 
 
     $scope.dataFiltered = {
-        dataset: [{
-            dimension: 'language',
-            operator: 'equal',
-            value: 'french'
-        }, {
-            dimension: 'language',
-            operator: '=',
-            value: 'english'
-        }],
+        dataset: [
+            [{
+                dimension: 'country',
+                operator: 'equal',
+                value: 'greece'
+            }, {
+                dimension: 'language',
+                operator: '=',
+                value: 'english'
+            }],
+            []
+        ],
         data: [
             []
         ],
         visualization: 'day',
         updateLines: function(newDataset) {
             var fail = false;
+            var lines = [];
+            var linesPromises = [];
+            var that = this;
+            var fetchLinesPromise;
+
             newDataset.forEach(function(el, index) {
-                this.data[index] = ajax.getUsersTimeLineFiltered(this.visualization, el, function() {}, function() {
-                    fail = true;
+                linesPromises[index] = ajax.getUsersTimeLineFiltered(that.visualization, el).then(function(res) {
+                    lines[index] = res;
                 });
             });
-            if (fail) {
-                console.log('error');
-            }
+            fetchLinesPromise = $q.all(linesPromises);
+            fetchLinesPromise.then(function() {
+                that.data = mergeLinesInArrayTable(lines);
+            });
         },
         changeVisualization: function(visualization) {
             this.visualization = visualization;
@@ -46,13 +57,63 @@ angular.module('publicApp')
         }
     };
 
-    // $scope.dataFiltered = ajax.getUsersTimeLineFiltered('day', [{
-    //     dimension: 'country',
-    //     value: 'greece'
-    // }, {
-    //     dimension: 'language',
-    //     value: 'english'
-    // }]);
+
+    function mergeLinesInArrayTable(lines) {
+        var max = lines[0].max('title'),
+            min = lines[0].min('title'),
+            data = [],
+            inserted,
+            newPoint, group, groupOfLine;
+        lines.forEach(function(line) {
+            var maxOfLine = line.max('title'),
+                minOfLine = line.min('title');
+
+            if (maxOfLine > max) {
+                max = maxOfLine;
+            }
+            if (minOfLine < min) {
+                min = minOfLine;
+            }
+        });
+
+        for (var i = min; i <= max; i++) {
+            group = {
+                title: i,
+                array: []
+            };
+            inserted = false;
+            for (var j = 0; j < lines.length; j++) {
+                groupOfLine = lines[j].getByProperty('title', i);
+                if (groupOfLine) {
+                    groupOfLine.array.forEach(function(point) {
+                        newPoint = new Array(lines.length + 1);
+                        newPoint.forEach(function(el) {
+                            el = undefined;
+                        });
+                        newPoint[0] = point[0];
+                        newPoint[j + 1] = point[1];
+                        group.array.push(newPoint);
+                        inserted = true;
+                    });
+
+
+                }
+
+            }
+            if (inserted) data.push(group);
+        }
+        return data;
+    }
+    $scope.dataFiltered.updateLines($scope.dataFiltered.dataset);
+    $scope.dataFiltered2 = ajax.getUsersTimeLineFiltered('day', [{
+        dimension: 'country',
+        operator: 'equal',
+        value: 'greece'
+    }, {
+        dimension: 'language',
+        operator: 'equal',
+        value: 'english'
+    }]);
     // // $scope.setDataFiltered = function(visualization) {
     // //     $scope.dataFiltered = ajax.getUsersTimeLineFiltered(visualization, [{
     // //         dimension: 'country',

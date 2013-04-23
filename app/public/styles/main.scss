@@ -108,8 +108,8 @@ body{
     }
 
     .containerSideOpen{
-        margin-left: 0px;
-        -webkit-transform: translate3d($gridColumnWidth1200 * 4,0,0) !important;
+        margin-left: $gridColumnWidth1200 * 4;
+        // -webkit-transform: translate3d($gridColumnWidth1200 * 4,0,0) !important;
     }
 
 }
