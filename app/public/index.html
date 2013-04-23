@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="myContainer containerSideOpen">
+        <div  class="myContainer containerSideOpen">
 
           <div class="navbar ">
             <div class="navbar-inner">
@@ -70,8 +70,8 @@
               </div>
             </div>
           </div>
-          <div class="row-fluid" >
-            <div class="content" ng-view>
+          <div  class="row-fluid" id="scrollContainer" >
+            <div   class="content" ng-view>
               
             </div>
           </div>
@@ -85,6 +85,9 @@
         <script src="components/angular-resource/angular-resource.js"></script>
         <script src="components/angular-cookies/angular-cookies.js"></script>
         <script src="components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="components/bootstrap/js/bootstrap-modal.js"></script>
+        <script src="components/bootstrap/js/bootstrap-transition.js"></script>
+        <script src="components/iscroll/src/iscroll.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/app.js"></script>
@@ -95,6 +98,7 @@
         <script src="scripts/services/ajax.js"></script>
         <script src="scripts/directives/collapse.js"></script>
         <script src="scripts/directives/geochart.js"></script>
+        <script src="scripts/directives/modal.js"></script>
         <!-- endbuild -->
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -108,7 +112,7 @@
       $(function(){
         setTimeout(function(){
           $('a.brand').click(function(){
-              $('.sidebar').toggleClass('sidebarClose').toggleClass('sidebarOpen');
+              // $('.sidebar').toggleClass('sidebarClose').toggleClass('sidebarOpen');
               $('.myContainer').toggleClass('containerSideClose').toggleClass('containerSideOpen');
           });
 
@@ -117,5 +121,8 @@
       });
 
     </script>
+
+
+    ul>li*10>lorem10
 </body>
       </html>

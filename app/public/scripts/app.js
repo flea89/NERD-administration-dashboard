@@ -9,8 +9,7 @@ google.load('visualization', '1', {
 });
 
 
-angular.module('publicApp', [])
-    .config(function($routeProvider) {
+angular.module('publicApp', []).config(function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
@@ -23,5 +22,10 @@ angular.module('publicApp', [])
         redirectTo: '/'
     });
 }).run(function() {
-
+    var myScroll = new iScroll('scrollContainer', {
+        bounceLock: true
+    });
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    });
 });

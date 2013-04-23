@@ -306,7 +306,7 @@ module.exports = function(grunt) {
         'clean:server',
         'coffee:dist',
         'compass:server',
-        'livereload-start',
+    //'livereload-start',
     // 'connect:livereload',
     // 'open',
     'rerun:defaults',

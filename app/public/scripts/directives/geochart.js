@@ -7,7 +7,7 @@ angular.module('publicApp')
             '<div class="graph-title"><span class="text-title">{{title}}</span>',
             '<div class="btn button-collapse">collapse</div>',
             '</div>',
-            '<div class="chart" id="chart_div" style=" height: 300px; ></div><div class="control"></div></div>'].join('\n'),
+            '<div class="chart" id="chart_div" style=" height: 270px; ></div><div class="control"></div></div>'].join('\n'),
         restrict: 'EA',
         scope: {
             title: '@',
@@ -25,6 +25,7 @@ angular.module('publicApp')
                     table = google.visualization.arrayToDataTable(scope.data);
                     options = {
                         title: scope.title,
+                        region: 150
                     };
                     chart.draw(table, options);
                 }

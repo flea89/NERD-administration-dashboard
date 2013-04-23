@@ -19,15 +19,11 @@ function timeHandler(req, res) {
         all: 'YEAR(tokenTimeStamp) AS year'
     },
     filter, query,
-    filterType = req.query.filterType,
-        reqFilter = req.query.filter,
+    filters = req.query.filters,
         reqTimeAggragator = req.query.timeAggregator;
 
-    console.log('timeAggregator: ' + reqTimeAggragator);
-    console.log('filterType: ' + filterType);
-    console.log('filter: ' + reqFilter);
-
-    switch (filterType) {
+    // console.log(filters);
+    switch (filters) {
         case undefined:
             filter = '';
             break;
@@ -38,16 +34,25 @@ function timeHandler(req, res) {
             // TODO
             break;
         default:
-            if (reqFilter) {
-                filter = 'WHERE ' + filterType + ' = "' + reqFilter + '"';
+            if (filters) {
+                filters = JSON.parse(filters);
+                filter = 'WHERE ';
+                filters.forEach(function(element, index) {
+                    filter += element.dimension + ' = "' + element.value + '"';
+                    console.log(filters, filters.length, index);
+                    if (index !== filters.length - 1) {
+                        filter += ' AND ';
+                    }
+                });
             } else {
                 throw new Error('Filter has to be Defined');
             }
             break;
 
     }
+    console.log(filter);
     query = 'SELECT ' + selectDateFunction[reqTimeAggragator] + ', COUNT(idUser) as number from user ' + filter + ' ' + timeAggregator[reqTimeAggragator];
-    console.log('query: ' + query);
+    // console.log('query: ' + query);
     return pool.query(query);
 }
 
@@ -55,7 +60,7 @@ function timeHandler(req, res) {
 function groupByHandler(req, res) {
     var filter, query,
     groupBy = req.query.groupBy;
-    console.log(groupBy);
+    // console.log(groupBy);
     // switch (filterType) {
     //     case undefined:
     //         req.send('groupby is not defined');
@@ -94,12 +99,12 @@ exports.list = function(req, res) {
         groupBy: groupByHandler
     };
 
-    console.log('type: ' + req.query.type);
+    // console.log('type: ' + req.query.type);
 
     if (type[req.query.type]) {
         queryPromise = type[req.query.type](req, res);
     } else {
-        console.log('Type is not Defined');
+        // console.log('Type is not Defined');
         res.json('invalid request type is not defined');
         return;
     }

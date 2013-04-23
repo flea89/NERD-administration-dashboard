@@ -3,23 +3,27 @@
 angular.module('publicApp')
     .directive('timeline', function() {
     return {
+        transclude: 'true',
         scope: {
             data: '=',
             title: '@',
-            changev: '&'
+            changev: '&',
+            options: '@'
         },
         template: ['<div class="graph-box">',
             '<div class="graph-title"><span class="text-title">{{title}}</span>',
-            '<span class="visualizationControls"><div class="btn disabled" ng-click="click()">Day</div> ',
-            '<div class="btn">Week</div>',
-            '<div class="btn">Month</div>',
-            '<div class="btn">Year</div></span>',
             '<span class="navigationControls hidden-phone"><div class="btn prev">prev</div>',
             '<div class="btn disabled succ">succ</div>',
             '</span>',
             '<div class="btn button-collapse">collapse</div>',
+            '<a href="#myModal" role="button" class="btn" data-toggle="modal" data-target="#{{options}}" ng-show="options">opt</a>',
             '</div>',
-            '<div class="chart" id="chart_div" ></div><div class="control"></div></div>'].join('\n'),
+            '<div class="chart" id="chart_div" ></div><div class="control"></div>',
+            '<span class="visualizationControls hidden-phone"><div class="btn disabled" ng-click="click()">Day</div> ',
+            '<div class="btn">Week</div>',
+            '<div class="btn">Month</div>',
+            '<div class="btn">Year</div></span>',
+            '<div ng-transclude></div>'].join('\n'),
 
         restrict: 'EA',
         link: function postLink(scope, element, attrs) {
@@ -39,11 +43,12 @@ angular.module('publicApp')
                 succ: $(element[0]).find('.succ')
             };
 
+            var overlay = $(element[0]).find('#overlay')[0];
+
             var options;
 
 
             scope.$watch('data', function() {
-                console.log(scope.data);
                 if (scope.data.length > 0) {
                     scope.indexTimeView = scope.data.length - 1;
                     options = {
@@ -170,7 +175,6 @@ angular.module('publicApp')
 
             $('.content').touchwipe({
                 wipeRight: function() {
-                    console.log('wipeRight');
                     scope.indexTimeView -= 1;
                     if (scope.indexTimeView < 2) {
                         scope.indexTimeView = 1;
@@ -186,7 +190,6 @@ angular.module('publicApp')
 
                 },
                 wipeLeft: function() {
-                    console.log('wipeRight');
                     scope.indexTimeView += 1;
                     if (scope.indexTimeView >= scope.data.length - 1) {
                         scope.indexTimeView = scope.data.length - 1;
@@ -204,7 +207,15 @@ angular.module('publicApp')
                 }
             });
 
+            // optButton.onclick = function() {
+            //     $(timelineOptions).addClass('opt-in');
+            //     $(overlay).addClass('fade-in');
+            // };
 
+            // timelineOptionsClose.onclick = function() {
+            //     $(timelineOptions).removeClass('opt-in');
+            //     $(overlay).removeClass('fade-in');
+            // };
         }
     };
 });

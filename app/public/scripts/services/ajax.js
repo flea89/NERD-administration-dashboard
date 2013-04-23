@@ -23,12 +23,11 @@ angular.module('publicApp')
         return new Date(item.year, month - 1, day);
     }
 
-    function getUsersTimeLineFiltered(aggregation, filterType, filter, success, fail) {
-        return getUsersTimeLine(aggregation, success, fail, filterType, filter);
-
+    function getUsersTimeLineFiltered(aggregation, filters, success, fail) {
+        return getUsersTimeLine(aggregation, success, fail, filters);
     }
 
-    function getUsersTimeLine(aggregation, success, fail, filterType, filter) {
+    function getUsersTimeLine(aggregation, success, fail, filter) {
         var group,
         aggregationConfig = {
             day: {
@@ -49,12 +48,17 @@ angular.module('publicApp')
 
 
         if (returnData.length < 1) {
-            ajax.query({
+            var ajaxReq = {
                 type: 'time',
                 timeAggregator: aggregation,
-                filterType: filterType === undefined ? '' : filterType,
-                filter: filter === undefined ? '' : filter
-            }, function(res) {
+            };
+
+            if (filter) {
+                ajaxReq.filters = JSON.stringify(filter);
+            }
+
+
+            ajax.query(ajaxReq, function(res) {
                 res.reduce(
 
                 function reduceDates(prev, curr) {
