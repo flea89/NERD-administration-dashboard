@@ -9,21 +9,28 @@ angular.module('publicApp')
             title: '@',
             changev: '&',
             options: '@',
-            multiline: '@'
+            multiline: '@',
+            dataset: '='
         },
         template: ['<div class="graph-box">',
             '<div class="graph-title"><span class="text-title">{{title}}</span>',
-            '<span class="navigationControls hidden-phone"><div class="btn prev">prev</div>',
-            '<div class="btn disabled succ">succ</div>',
+            '<span class="navigationControls hidden-phone"><div class="btn prev" data-shift="prev"><i class="icon-chevron-left" data-shift="prev"></i></div>',
+            '<div class="btn disabled succ" data-shift="succ"><i class="icon-chevron-right" data-shift="succ"></i></div>',
             '</span>',
-            '<div class="btn button-collapse">collapse</div>',
-            '<a href="#myModal" role="button" class="btn" data-toggle="modal" data-target="#{{options}}" ng-show="options">opt</a>',
+            '<span style="float: right">',
+            '<span class="btn-group visualizationControls">',
+            '<a class="dropdown-toggle" ng-class="" data-toggle="dropdown" href=""><i class="icon-th-large visualizationIcon"></i></a>',
+            '<ul class="pull-right dropdown-menu">',
+            '<li><a class="btnv disabled " ng-click="click()" data-visualization="day">Day</a> </li>',
+            '<li><a class="btnv" data-visualization="week" >Week</a> </li>',
+            '<li><a class="btnv" data-visualization="month">Month</a> </li>',
+            '<li><a class="btnv" data-visualization="year">Year</a> </li>',
+            '</ul></span>',
+            '<a href="#myModal" role="button" data-toggle="modal" data-target="#{{options}}" ng-show="options"><i class="icon-cog configIcon"></i></a>',
+            '<span class="button-collapse"><i class="icon-chevron-down" ></i></span>',
+            '</span>',
             '</div>',
             '<div class="chart" id="chart_div" ></div><div class="control"></div>',
-            '<span class="visualizationControls hidden-phone"><div class="btn disabled" ng-click="click()">Day</div> ',
-            '<div class="btn">Week</div>',
-            '<div class="btn">Month</div>',
-            '<div class="btn">Year</div></span>',
             '<div ng-transclude></div>'].join('\n'),
 
         restrict: 'EA',
@@ -80,29 +87,24 @@ angular.module('publicApp')
                     setDateAxis(options);
                     setTitle(options);
                     checkNavigationControls();
-                    data = new google.visualization.DataTable();
-                    data.addColumn('date', 'Date');
-                    data.addColumn('number', 'Registration');
-                    data.addColumn('number', 'Registration2');
-                    scope.data[scope.indexTimeView].array.forEach(function(el) {
-                        data.addRow(el);
-                    });
-                    annotatedtimeline.draw(data, options);
+                    createDataTable();
+                    setTitle(options);
+                    annotatedtimeline.draw(scope.dataTable, options);
                 }
             }, true);
 
             $('a.brand').click(function() {
                 $(graph).fadeOut(300).fadeIn(400);
                 setTimeout(function() {
-                    annotatedtimeline.draw(data, options);
+                    annotatedtimeline.draw(scope.dataTable, options);
 
                 }, 300);
 
 
             });
 
-            $(element[0]).find('.visualizationControls > .btn').click(function(event) {
-                var targetText = $(event.target).html().toLowerCase();
+            $(element[0]).find('.visualizationControls .btnv').click(function(event) {
+                var targetText = $(event.target).data('visualization').toLowerCase();
                 $(event.target).addClass('disabled');
                 $(event.target).siblings().removeClass('disabled');
                 scope.changev({
@@ -135,17 +137,10 @@ angular.module('publicApp')
                         return scope.data[scope.indexTimeView];
                     }
                 };
-                data = new google.visualization.DataTable();
-                data.addColumn('date', 'Date');
-                data.addColumn('number', 'Registration');
-                data.addColumn('number', 'Registration2');
-
-                controls[$(event.target).html()]().array.forEach(function(el) {
-                    data.addRow(el);
-                });
+                data = createDataTable(controls);
                 setTitle(options);
                 checkNavigationControls();
-                annotatedtimeline.draw(data, options);
+                annotatedtimeline.draw(scope.dataTable, options);
 
             });
 
@@ -173,24 +168,18 @@ angular.module('publicApp')
             }
 
             function setTitle(options) {
-                options.title = scope.data[scope.indexTimeView].title;
+                options.title = new Date(scope.data[scope.indexTimeView].title);
             }
 
-            $('.content').touchwipe({
+            $(element[0]).touchwipe({
                 wipeRight: function() {
                     scope.indexTimeView -= 1;
                     if (scope.indexTimeView < 2) {
                         scope.indexTimeView = 1;
                     }
-                    data = new google.visualization.DataTable();
-                    data.addColumn('date', 'Date');
-                    data.addColumn('number', 'Registration');
-                    data.addColumn('number', 'Registration2');
-                    scope.data[scope.indexTimeView].array.forEach(function(el) {
-                        data.addRow(el);
-                    });
+                    data = createDataTable();
                     setTitle(options);
-                    annotatedtimeline.draw(data, options);
+                    annotatedtimeline.draw(scope.dataTable, options);
 
                 },
                 wipeLeft: function() {
@@ -198,20 +187,38 @@ angular.module('publicApp')
                     if (scope.indexTimeView >= scope.data.length - 1) {
                         scope.indexTimeView = scope.data.length - 1;
                     }
-                    data = new google.visualization.DataTable();
-                    data.addColumn('date', 'Date');
-                    data.addColumn('number', 'Registration');
-                    data.addColumn('number', 'Registration2');
-                    scope.data[scope.indexTimeView].array.forEach(function(el) {
-                        data.addRow(el);
-                    });
+                    data = createDataTable();
                     setTitle(options);
-                    annotatedtimeline.draw(data, options);
+                    annotatedtimeline.draw(scope.dataTable, options);
 
 
                 }
             });
 
+            function createDataTable(controls) {
+                scope.dataTable = new google.visualization.DataTable();
+                scope.dataTable.addColumn('date', 'Date');
+                if (scope.dataset === undefined) {
+                    scope.dataTable.addColumn('number', 'Registration');
+                } else {
+                    for (var i = 0; i < scope.dataset.length; i++) {
+                        scope.dataTable.addColumn('number', 'Registration' + i);
+                    }
+                }
+
+                if (controls) {
+                    controls[$(event.target).data('shift')]().array.forEach(function(el) {
+                        scope.dataTable.addRow(el);
+                    });
+                } else {
+                    scope.data[scope.indexTimeView].array.forEach(function(el) {
+                        scope.dataTable.addRow(el);
+                    });
+                }
+
+
+
+            }
             // optButton.onclick = function() {
             //     $(timelineOptions).addClass('opt-in');
             //     $(overlay).addClass('fade-in');

@@ -23,12 +23,10 @@ angular.module('publicApp')
         return new Date(item.year, month - 1, day);
     }
 
-    function getUsersTimeLineFiltered(aggregation, filters, success, fail) {
-        return getUsersTimeLine(aggregation, success, fail, filters);
-    }
 
-    function getUsersTimeLine(aggregation, success, fail, filter) {
+    function getUsersTimeLine(aggregation, filter) {
         var group,
+        titleDate,
         aggregationConfig = {
             day: {
                 range: 'month',
@@ -67,8 +65,18 @@ angular.module('publicApp')
                         if (group) {
                             returnData.push(group);
                         }
+                        if (aggregation === 'day') {
+                            titleDate = createDate({
+                                year: curr.year,
+                                month: curr.month
+                            });
+                        } else {
+                            titleDate = createDate({
+                                year: curr.year
+                            });
+                        }
                         group = {
-                            title: curr[aggregationConfig[aggregation].range],
+                            title: titleDate.getTime(),
                             array:   [
                                 [
                                 createDate(curr), curr.number]
@@ -82,28 +90,16 @@ angular.module('publicApp')
                 if (group) {
                     returnData.push(group);
                 }
-
-                if (typeof success === 'function') {
-                    success(res);
-                }
                 defer.resolve(returnData);
-            },
-
-            function() {
+            }, function() {
                 console.log('UserQueryError');
-                if (typeof fail === 'function') {
-                    fail();
-                }
                 defer.reject('UserQueryError');
             });
 
-            return defer.promise;
         } else {
-            if (typeof success === 'function') {
-                success();
-            }
-            return defer.promise;
+            defer.resolve(returnData);
         }
+        return defer.promise;
     }
 
     function getUsersGroupBy(aggregation, success, fail) {
@@ -126,7 +122,6 @@ angular.module('publicApp')
     return {
         getUsersTimeLine: getUsersTimeLine,
         getUsersGroupBy: getUsersGroupBy,
-        getUsersTimeLineFiltered: getUsersTimeLineFiltered
     };
 
 });

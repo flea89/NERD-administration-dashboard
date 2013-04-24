@@ -2,8 +2,8 @@
 
 <div class="row-fluid">
     <div class="span12 ">
-<!--         <timeline data="data" changev="setData(visualization)" title='# of Users' collapse>
-        </timeline> -->
+        <timeline data="data" changev="setData(visualization)" title='# of Users' collapse>
+        </timeline>
 
     </div>
 
@@ -11,8 +11,8 @@
 <div class="row-fluid">
     <div class="span12 box">
 
-        <timeline data="dataFiltered.data" multiline='true' options='timeline-opt' changev="dataFiltered.changeVisualization" title='Multiline Graph' collapse>
-            <div modal id-modal='timeline-opt' filtertypes="filterTypes" change-data-set="dataFiltered.updateLines()"></div>
+        <timeline data="dataFiltered.data" dataset="dataFiltered.dataset" multiline='true' options='timeline-opt' changev="dataFiltered.changeVisualization(visualization)" title='Multiline Graph' collapse>
+            <div modal id-modal='timeline-opt' dataset="dataFiltered.dataset" change-data-set="dataFiltered.updateLines(newDataset)"></div>
         </timeline>
 
 

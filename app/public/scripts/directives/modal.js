@@ -4,7 +4,9 @@ angular.module('publicApp')
     .directive('modal', function($compile) {
     return {
         scope: {
-            idModal: '@'
+            idModal: '@',
+            changeDataSet: '&',
+            dataset: '='
         },
         template: ['<div id="{{idModal}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">',
             '<div class="modal-header">',
@@ -20,28 +22,36 @@ angular.module('publicApp')
 
             '<li ng-repeat="filter in line">Dimension:',
             '<select ng-model="line[$index].dimension" ng-options="filter for filter in filtersList">',
-            '<option value="">-- chose filter --</option>',
-            '</select><a href="" class="modal-remove-line" ng-click="removeFilter($parent.$index,$index)">x</a></li>',
+            '<option value="">-- dimension --</option>',
+            '</select>',
+            '<select ng-model="line[$index].operator" ng-options="operator for operator in operators">',
+            '<option value="">-- operator --</option>',
+            '</select>',
+            '<input type="text" ng-model="line[$index].value"/>',
+            '<a href="" class="modal-remove-line" ng-click="removeFilter($parent.$index,$index)">x</a></li>',
             '</ul></div>',
             '</div><div class="modal-footer">',
             '<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>',
-            '<button class="btn btn-primary" ng-click=reportLines()>Save changes</button>',
+            '<button class="btn btn-primary" ng-click=save()>Save changes</button>',
             '</div>',
             '</div>'].join('\n'),
         restrict: 'EA',
         link: function postLink(scope, element, attrs) {
+            var dataSet;
 
             scope.filtersList = ['country', 'language'];
             scope.selectedFilter = 'language';
             scope.operators = ['equal', 'greater', 'less'];
+            scope.lines = angular.copy(scope.dataset);
 
-            scope.lines = [
-                [{
-                    dimension: 'language',
-                    operator: 'equal',
-                    value: 'french'
-                }]
-            ];
+            scope.save = function() {
+                dataSet = angular.copy(scope.lines);
+                scope.changeDataSet({
+                    newDataset: dataSet
+                });
+                $('#' + scope.idModal).modal('hide');
+            };
+
             scope.addline = function() {
                 scope.lines.push([{
                     dimension: undefined,

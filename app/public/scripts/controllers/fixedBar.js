@@ -28,7 +28,11 @@ angular.module('publicApp')
                 operator: '=',
                 value: 'english'
             }],
-            []
+            [{
+                dimension: 'language',
+                operator: 'equal',
+                value: 'french'
+            }]
         ],
         data: [
             []
@@ -40,9 +44,10 @@ angular.module('publicApp')
             var linesPromises = [];
             var that = this;
             var fetchLinesPromise;
+            this.dataset = newDataset;
 
             newDataset.forEach(function(el, index) {
-                linesPromises[index] = ajax.getUsersTimeLineFiltered(that.visualization, el).then(function(res) {
+                linesPromises[index] = ajax.getUsersTimeLine(that.visualization, el).then(function(res) {
                     lines[index] = res;
                 });
             });
@@ -76,14 +81,23 @@ angular.module('publicApp')
             }
         });
 
-        for (var i = min; i <= max; i++) {
+        var titles = [];
+
+        lines.forEach(function(el) {
+            titles = titles.concat(el.map(function(e) {
+                return e.title;
+            }));
+        });
+        titles = titles.unique();
+        titles.sort();
+        titles.forEach(function(title, index) {
             group = {
-                title: i,
+                title: title,
                 array: []
             };
             inserted = false;
             for (var j = 0; j < lines.length; j++) {
-                groupOfLine = lines[j].getByProperty('title', i);
+                groupOfLine = lines[j].getByProperty('title', title);
                 if (groupOfLine) {
                     groupOfLine.array.forEach(function(point) {
                         newPoint = new Array(lines.length + 1);
@@ -95,27 +109,21 @@ angular.module('publicApp')
                         group.array.push(newPoint);
                         inserted = true;
                     });
-
-
                 }
 
             }
             if (inserted) data.push(group);
-        }
+        });
         return data;
     }
     $scope.dataFiltered.updateLines($scope.dataFiltered.dataset);
-    $scope.dataFiltered2 = ajax.getUsersTimeLineFiltered('day', [{
-        dimension: 'country',
-        operator: 'equal',
-        value: 'greece'
-    }, {
-        dimension: 'language',
-        operator: 'equal',
-        value: 'english'
-    }]);
+    // $scope.dataFiltered2 = ajax.getUsersTimeLine('day', [{
+    //     dimension: 'country',
+    //     operator: 'equal',
+    //     value: 'greece'
+    // }]);
     // // $scope.setDataFiltered = function(visualization) {
-    // //     $scope.dataFiltered = ajax.getUsersTimeLineFiltered(visualization, [{
+    // //     $scope.dataFiltered = ajax.getUsersTimeLine(visualization, [{
     // //         dimension: 'country',
     // //         operator: '=',
     // //         value: 'greece'

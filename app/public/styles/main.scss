@@ -231,6 +231,8 @@ line-height: 36px;
 
 .chart{
     width: 100%;
+    height: 265px;
+
     // padding-right: 20px;
     // box-sizing: border-box;
 }
@@ -247,10 +249,10 @@ text-shadow: 0px 1px 0px #fff;
 }
 
 .navigationControls{
-    float: right;
 }
 .visualizationControls{
-    position: absolute;
+    // float: right;
+    z-index: 200;
 
     //     -webkit-transform: rotate(-270deg);
     // -webkit-transform-origin: bottom left;
@@ -270,3 +272,34 @@ text-shadow: 0px 1px 0px #fff;
     float: right;
 }
 
+.modal-body{
+    select{
+        width: 100px;
+    }
+    input[type="text"]{ 
+        width: 100px;}
+}
+ .button-collapse{
+    // float: right;
+    margin-right: 15px;
+ }
+
+ .visualizationIcon{
+    margin-right: 30px;
+    margin-top: -11px;
+ }
+ .configIcon{
+   margin-right: 30px;
+   margin-top: 3px;
+ }
+.dropdown-menu{
+    z-index: 100;
+}
+ .pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
+}
