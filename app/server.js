@@ -4,6 +4,7 @@
 var express = require('express'),
   routes = require('./routes'),
   user = require('./routes/user'),
+  entity = require('./routes/entity'),
   http = require('http'),
   mysql = require('mysql'),
   path = require('path');
@@ -30,6 +31,7 @@ app.configure('development', function() {
 });
 
 app.get('/users', user.list);
+app.get('/entities', entity.list);
 
 
 var server = http.createServer(app);

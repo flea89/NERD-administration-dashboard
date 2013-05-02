@@ -1,0 +1,33 @@
+<h2>Entities Statistics</h2>
+
+<div class="row-fluid">
+    <div class="span12">
+        <timeline data="dataFiltered.data" dataset="dataFiltered.dataset" multiline='true' options='timelineEntities-opt' changev="dataFiltered.changeVisualization(visualization)" title='Multiline Graph' collapse>
+            <div modal-entities id-modal='timelineEntities-opt' dataset="dataFiltered.dataset" change-data-set="dataFiltered.updateLines(newDataset)"></div>
+        </timeline>
+
+        <!--         <timeline data="dataTimeline" changev="setData(visualization)" title='# of Users' collapse></timeline>
+    -->
+</div>
+
+<div class="row-fluid">
+    <div class="span6 ">
+        <piechart title="By NerdType" data="UsersGroupByNerdType"collapse></piechart>
+    </div>
+
+    <div class="span6 ">
+        <piechart title="YAHOO By NerdType" data="UsersGroupByNerdTypeYahoo"collapse></piechart>
+    </div>
+
+<div class="row-fluid">
+    <div class="span6 ">
+        <piechart title="Wikimeta By NerdType" data="UsersGroupByNerdTypeWikimeta"collapse></piechart>
+    </div>
+
+    <div class="span6 ">
+        <piechart title="AlchemyAPI By NerdType" data="UsersGroupByNerdTypeAlchemy"collapse></piechart>
+    </div>
+
+        
+
+</div>

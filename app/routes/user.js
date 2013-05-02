@@ -18,8 +18,8 @@ function timeHandler(req, res) {
         month: 'YEAR(tokenTimeStamp) AS year, MONTH(tokenTimeStamp) AS month',
         all: 'YEAR(tokenTimeStamp) AS year'
     },
-    filter, query,
-    filters = req.query.filters,
+    filter, query, groupByFilter = '',
+        filters = req.query.filters,
         reqTimeAggragator = req.query.timeAggregator;
 
     // console.log(filters);
@@ -39,6 +39,7 @@ function timeHandler(req, res) {
                 filter = 'WHERE ';
                 filters.forEach(function(element, index) {
                     filter += element.dimension + ' = "' + element.value + '"';
+                    groupByFilter += ' , ' + element.dimension;
                     console.log(filters, filters.length, index);
                     if (index !== filters.length - 1) {
                         filter += ' AND ';
@@ -51,8 +52,8 @@ function timeHandler(req, res) {
 
     }
     console.log(filter);
-    query = 'SELECT ' + selectDateFunction[reqTimeAggragator] + ', COUNT(idUser) as number from user ' + filter + ' ' + timeAggregator[reqTimeAggragator];
-    // console.log('query: ' + query);
+    query = 'SELECT ' + selectDateFunction[reqTimeAggragator] + ', COUNT(idUser) as number from user ' + filter + ' ' + timeAggregator[reqTimeAggragator] + groupByFilter;
+    console.log('query: ' + query);
     return pool.query(query);
 }
 

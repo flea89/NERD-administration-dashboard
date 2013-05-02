@@ -24,7 +24,7 @@ angular.module('publicApp')
             '<select ng-model="line[$index].dimension" ng-options="filter for filter in filtersList">',
             '<option value="">-- dimension --</option>',
             '</select>',
-            '<select ng-model="line[$index].operator" ng-options="operator for operator in operators">',
+            '<span><select ng-model="line[$index].operator" ng-options="operator for operator in operators" class="operator"><span>',
             '<option value="">-- operator --</option>',
             '</select>',
             '<input type="text" ng-model="line[$index].value"/>',
@@ -41,7 +41,7 @@ angular.module('publicApp')
 
             scope.filtersList = ['country', 'language'];
             scope.selectedFilter = 'language';
-            scope.operators = ['equal', 'greater', 'less'];
+            scope.operators = ['=', '>', '<'];
             scope.lines = angular.copy(scope.dataset);
 
             scope.save = function() {
@@ -66,7 +66,7 @@ angular.module('publicApp')
             scope.addFilter = function(lineNumber) {
                 scope.lines[lineNumber].push({
                     dimension: undefined,
-                    operator: undefined,
+                    operator: '=',
                     value: undefined
                 });
             };

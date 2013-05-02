@@ -11,12 +11,16 @@ google.load('visualization', '1', {
 
 angular.module('publicApp', []).config(function($routeProvider) {
     $routeProvider.when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-    })
-        .when('/fixedBar', {
         templateUrl: 'views/fixedBar.html',
         controller: 'FixedBarCtrl'
+    })
+        .when('/users', {
+        templateUrl: 'views/fixedBar.html',
+        controller: 'FixedBarCtrl'
+    })
+        .when('/entities', {
+        templateUrl: 'views/entities.html',
+        controller: 'EntitiesCtrl'
     })
         .otherwise({
         redirectTo: '/'
@@ -67,7 +71,7 @@ angular.module('publicApp', []).config(function($routeProvider) {
         return check;
     }
 
-    if (mobilecheck()){
+    if (mobilecheck()) {
         var myScroll = new iScroll('scrollContainer', {
             bounceLock: true
         });

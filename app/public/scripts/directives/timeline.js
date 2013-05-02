@@ -74,12 +74,12 @@ angular.module('publicApp')
                             minValue: 0
                         },
                         chartArea: {
-                            width: '90%',
+                            left: '100px',
+                            width: '75%',
                             height: '600px',
-                            left: 50
                         },
                         legend: {
-                            position: 'left'
+                            position: 'right'
                         },
                         pointSize: 6
                     };
@@ -202,7 +202,7 @@ angular.module('publicApp')
                     scope.dataTable.addColumn('number', 'Registration');
                 } else {
                     for (var i = 0; i < scope.dataset.length; i++) {
-                        scope.dataTable.addColumn('number', 'Registration' + i);
+                        scope.dataTable.addColumn('number', 'Line ' + i + 1);
                     }
                 }
 

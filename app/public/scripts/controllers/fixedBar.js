@@ -21,7 +21,7 @@ angular.module('publicApp')
         dataset: [
             [{
                 dimension: 'country',
-                operator: 'equal',
+                operator: '=',
                 value: 'greece'
             }, {
                 dimension: 'language',
@@ -30,7 +30,7 @@ angular.module('publicApp')
             }],
             [{
                 dimension: 'language',
-                operator: 'equal',
+                operator: '=',
                 value: 'french'
             }]
         ],
