@@ -22,10 +22,30 @@ angular.module('publicApp', []).config(function($routeProvider) {
         templateUrl: 'views/entities.html',
         controller: 'EntitiesCtrl'
     })
+        .when('/login:error', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });
-}).run(function() {
+}).run(function($rootScope, $http, $location) {
+
+    $http({
+        method: 'GET',
+        url: '/userAuth',
+    }).success(function(data) {
+        if (data.access !== 'denied') {
+            $rootScope.user = data;
+            $location.path('/');
+        } else {
+            $location.path('/login');
+        }
+
+
+    });
+
+
 
     Array.prototype.max = function(propertyName) {
         if (this.length === 0) return 0;

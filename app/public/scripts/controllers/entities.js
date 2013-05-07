@@ -2,17 +2,17 @@
 
 angular.module('publicApp')
     .controller('EntitiesCtrl', function($scope, entity, $q) {
-    $scope.awesomeThings = entity.getUsersTimeLine('day');
-    $scope.dataTimeline = entity.getUsersTimeLine('day', [{
-        dimension: 'nerdType',
-        operator: '=',
-        value: 'http://nerd.eurecom.fr/ontology#Location'
-    }, {
-        dimension: 'confidence',
-        operator: '>',
-        value: '1'
+    // $scope.awesomeThings = entity.getUsersTimeLine('day');
+    // $scope.dataTimeline = entity.getUsersTimeLine('day', [{
+    //     dimension: 'nerdType',
+    //     operator: '=',
+    //     value: 'http://nerd.eurecom.fr/ontology#Location'
+    // }, {
+    //     dimension: 'confidence',
+    //     operator: '>',
+    //     value: '1'
 
-    }]);
+    // }]);
 
     entity.getUsersGroupBy('nerdType', []).then(function(res) {
         res.splice(11, res.length - 11, (function() {

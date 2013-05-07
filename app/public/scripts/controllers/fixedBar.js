@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('publicApp')
-    .controller('FixedBarCtrl', function($scope, ajax, $q) {
+    .controller('FixedBarCtrl', function($scope, ajax, $q, filters) {
     $scope.data = [];
     ajax.getUsersTimeLine('day').then(function(result) {
         $scope.data = result;
@@ -18,22 +18,12 @@ angular.module('publicApp')
 
 
     $scope.dataFiltered = {
-        dataset: [
-            [{
-                dimension: 'country',
-                operator: '=',
-                value: 'greece'
-            }, {
-                dimension: 'language',
-                operator: '=',
-                value: 'english'
-            }],
-            [{
-                dimension: 'language',
-                operator: '=',
-                value: 'french'
-            }]
-        ],
+        dataset: {
+            idFilter: undefined,
+            filters: [
+                []
+            ]
+        },
         data: [
             []
         ],
@@ -44,9 +34,9 @@ angular.module('publicApp')
             var linesPromises = [];
             var that = this;
             var fetchLinesPromise;
-            this.dataset = newDataset;
-
-            newDataset.forEach(function(el, index) {
+            this.dataset.filters = newDataset.filters;
+            this.dataset.idFilter = newDataset.idFilter;
+            newDataset.filters.forEach(function(el, index) {
                 linesPromises[index] = ajax.getUsersTimeLine(that.visualization, el).then(function(res) {
                     lines[index] = res;
                 });
@@ -55,6 +45,8 @@ angular.module('publicApp')
             fetchLinesPromise.then(function() {
                 that.data = mergeLinesInArrayTable(lines);
             });
+
+            filters.putFilter(this.dataset.idFilter, 'user', angular.toJson(this.dataset.filters));
         },
         changeVisualization: function(visualization) {
             this.visualization = visualization;
@@ -116,21 +108,23 @@ angular.module('publicApp')
         });
         return data;
     }
-    $scope.dataFiltered.updateLines($scope.dataFiltered.dataset);
-    // $scope.dataFiltered2 = ajax.getUsersTimeLine('day', [{
-    //     dimension: 'country',
-    //     operator: 'equal',
-    //     value: 'greece'
-    // }]);
-    // // $scope.setDataFiltered = function(visualization) {
-    // //     $scope.dataFiltered = ajax.getUsersTimeLine(visualization, [{
-    // //         dimension: 'country',
-    // //         operator: '=',
-    // //         value: 'greece'
-    // //     }, {
-    // //         dimension: 'language',
-    // //         operator: '=',
-    // //         value: 'english'
-    // //     }]);
-    // // };
+    // $scope.dataFiltered.dataset = filters.getFilter('user');
+    // $scope.$watch('dataFiltered', function(newValue, oldValue) {
+    //     if (newValue.dataset.filters.length > 0) {
+    //         $scope.dataFiltered.updateLines($scope.dataFiltered.dataset);
+    //     }
+    // }, true);
+
+
+    // $scope.initialDataset = filters.getFilter('user');
+    filters.getFilter('user', function(filters) {
+        $scope.dataFiltered.updateLines(filters);
+    });
+
+    // $scope.$watch('initialDataset', function(newValue, oldValue) {
+    //     if (newValue.filters.length > 0) {
+    //         $scope.dataFiltered.updateLines(angular.copy($scope.initialDataset));
+    //     }
+    // }, true);
+
 });

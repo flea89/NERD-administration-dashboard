@@ -38,16 +38,22 @@ angular.module('publicApp')
         restrict: 'EA',
         link: function postLink(scope, element, attrs) {
             var dataSet;
-
+            scope.$watch('dataset', function(newValue, oldValue) {
+                scope.lines = angular.copy(scope.dataset.filters);
+            }, true);
             scope.filtersList = ['country', 'language'];
             scope.selectedFilter = 'language';
             scope.operators = ['=', '>', '<'];
-            scope.lines = angular.copy(scope.dataset);
+
 
             scope.save = function() {
                 dataSet = angular.copy(scope.lines);
                 scope.changeDataSet({
-                    newDataset: dataSet
+                    newDataset: {
+                        filters: dataSet,
+                        idFilter: scope.dataset.idFilter
+                    }
+
                 });
                 $('#' + scope.idModal).modal('hide');
             };

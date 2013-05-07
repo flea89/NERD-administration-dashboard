@@ -201,8 +201,10 @@ angular.module('publicApp')
                 if (scope.dataset === undefined) {
                     scope.dataTable.addColumn('number', 'Registration');
                 } else {
-                    for (var i = 0; i < scope.dataset.length; i++) {
-                        scope.dataTable.addColumn('number', 'Line ' + i + 1);
+                    if (scope.dataset.filters && scope.dataset.filters.length > 0) {
+                        for (var i = 0; i < scope.dataset.filters.length; i++) {
+                            scope.dataTable.addColumn('number', 'Line ' + i + 1);
+                        }
                     }
                 }
 

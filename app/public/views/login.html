@@ -1,0 +1,7 @@
+<form>
+    <p><label for="username">Username:</label><input type="text" name="username" ng-model="username" required/>
+    <p><label for="password">Password: </label><input type="password" name="password" ng-model="password" required/>
+    <p><input type="submit" ng-click="login()"></p>
+</form>
+
+<span ng-show="error">Utente o password errati</span>
