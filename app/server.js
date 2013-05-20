@@ -5,6 +5,7 @@ var express = require('express'),
     routes = require('./routes'),
     user = require('./routes/user'),
     entity = require('./routes/entity'),
+    annotation = require('./routes/annotation'),
     http = require('http'),
     mysql = require('mysql'),
     pool = require('./config/mysql.js'),
@@ -153,6 +154,7 @@ app.post('/login', function(req, res, next) {
 
 app.get('/users', ensureAuthenticated, user.list);
 app.get('/entities', ensureAuthenticated, entity.list);
+app.get('/annotations', ensureAuthenticated, annotation.list);
 app.get('/userAuth', ensureAuthenticated, function(req, res) {
     res.send(JSON.stringify(req.user));
 });

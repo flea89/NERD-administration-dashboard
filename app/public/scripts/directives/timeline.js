@@ -57,7 +57,7 @@ angular.module('publicApp')
 
 
             scope.$watch('data', function() {
-                if (scope.data.length > 0) {
+                if (scope.data.length > 1) {
                     scope.indexTimeView = scope.data.length - 1;
                     options = {
                         animation: {
