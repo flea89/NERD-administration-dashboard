@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('publicApp')
-    .directive('modalEntities', function($compile) {
+    .directive('modalAnnotation', function($compile) {
     return {
         scope: {
             idModal: '@',
@@ -39,8 +39,8 @@ angular.module('publicApp')
         link: function postLink(scope, element, attrs) {
             var dataSet;
 
-            scope.filtersList = ['nerdType', 'confidence'];
-            scope.operators = ['=', '>', '<'];
+            scope.filtersList = ['tool'];
+            scope.operators = ['='];
             scope.lines = angular.copy(scope.dataset.filters);
 
             scope.save = function() {

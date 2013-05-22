@@ -26,6 +26,10 @@ angular.module('publicApp', []).config(function($routeProvider) {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
     })
+        .when('/annotations', {
+        templateUrl: 'views/annotations.html',
+        controller: 'AnnotationsCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });

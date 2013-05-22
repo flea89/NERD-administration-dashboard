@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('publicApp')
-    .controller('FixedBarCtrl', function($scope, ajax, $q, filters,mergeLine) {
+    .controller('FixedBarCtrl', function($scope, ajax, $q, filters) {
     $scope.data = [];
     ajax.getUsersTimeLine('day').then(function(result) {
         $scope.data = result;
@@ -30,10 +30,10 @@ angular.module('publicApp')
         visualization: 'day',
         updateLines: function(newDataset) {
             var fail = false,
-             lines = [],
-             linesPromises = [],
-             that = this,
-             fetchLinesPromise;
+                lines = [],
+                linesPromises = [],
+                that = this,
+                fetchLinesPromise;
             this.dataset.filters = newDataset.filters;
             this.dataset.idFilter = newDataset.idFilter;
             newDataset.filters.forEach(function(el, index) {
@@ -43,7 +43,7 @@ angular.module('publicApp')
             });
             fetchLinesPromise = $q.all(linesPromises);
             fetchLinesPromise.then(function() {
-                that.data = mergeLine.mergeLinesInArrayTable(lines);
+                that.data = mergeLinesInArrayTable(lines);
             });
 
             filters.putFilter(this.dataset.idFilter, 'user', angular.toJson(this.dataset.filters));
@@ -69,10 +69,58 @@ angular.module('publicApp')
         $scope.dataFiltered.updateLines(filters);
     });
 
-    // $scope.$watch('initialDataset', function(newValue, oldValue) {
-    //     if (newValue.filters.length > 0) {
-    //         $scope.dataFiltered.updateLines(angular.copy($scope.initialDataset));
-    //     }
-    // }, true);
+    function mergeLinesInArrayTable(lines) {
+        var max = lines[0].max('title'),
+            min = lines[0].min('title'),
+            data = [],
+            inserted,
+            newPoint, group, groupOfLine;
+        lines.forEach(function(line) {
+            var maxOfLine = line.max('title'),
+                minOfLine = line.min('title');
+
+            if (maxOfLine > max) {
+                max = maxOfLine;
+            }
+            if (minOfLine < min) {
+                min = minOfLine;
+            }
+        });
+
+        var titles = [];
+
+        lines.forEach(function(el) {
+            titles = titles.concat(el.map(function(e) {
+                return e.title;
+            }));
+        });
+        titles = titles.unique();
+        titles.sort();
+        titles.forEach(function(title, index) {
+            group = {
+                title: title,
+                array: []
+            };
+            inserted = false;
+            for (var j = 0; j < lines.length; j++) {
+                groupOfLine = lines[j].getByProperty('title', title);
+                if (groupOfLine) {
+                    groupOfLine.array.forEach(function(point) {
+                        newPoint = new Array(lines.length + 1);
+                        newPoint.forEach(function(el) {
+                            el = undefined;
+                        });
+                        newPoint[0] = point[0];
+                        newPoint[j + 1] = point[1];
+                        group.array.push(newPoint);
+                        inserted = true;
+                    });
+                }
+
+            }
+            if (inserted) data.push(group);
+        });
+        return data;
+    }
 
 });

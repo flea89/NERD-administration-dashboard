@@ -128,9 +128,12 @@ angular.module('publicApp')
     });
 
     $scope.dataFiltered = {
-        dataset: [
-            []
-        ],
+        dataset: {
+            idFilter: undefined,
+            filters: [
+                []
+            ]
+        },
         data: [],
         visualization: 'day',
         updateLines: function(newDataset) {
@@ -139,9 +142,9 @@ angular.module('publicApp')
             var linesPromises = [];
             var that = this;
             var fetchLinesPromise;
-            this.dataset = newDataset;
+            this.dataset.filters = newDataset.filters;
 
-            newDataset.forEach(function(el, index) {
+            newDataset.filters.forEach(function(el, index) {
                 linesPromises[index] = entity.getUsersTimeLine(that.visualization, el).then(function(res) {
                     lines[index] = res;
                 });

@@ -39,10 +39,10 @@ function timeHandler(req, res) {
                 filters = JSON.parse(filters);
                 filter = ' AND ';
                 filters.forEach(function(element, index) {
-                    if (element.dimension === 'nerdType') {
-                        groupByFilter = ' , nerdType';
+                    if (element.dimension === 'tool') {
+                        groupByFilter = ' , name';
                     }
-
+                    element.dimension = element.dimension === 'tool' ? 'name' : element.dimension;
                     filter += element.dimension + ' ' + element.operator + ' "' + element.value + '"';
                     console.log(filters, filters.length, index);
                     if (index !== filters.length - 1) {
