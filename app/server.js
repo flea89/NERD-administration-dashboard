@@ -159,6 +159,21 @@ app.get('/userAuth', ensureAuthenticated, function(req, res) {
     res.send(JSON.stringify(req.user));
 });
 
+app.get('/autocomplete', ensureAuthenticated, function(req, res){
+    var table = req.query.table;
+    var column = req.query.column;
+    var queryStr ='SELECT DISTINCT ' + req.query.column + ' FROM ' + req.query.table;
+    var query = pool.query('SELECT DISTINCT ' + req.query.column + ' FROM ' + req.query.table);
+    console.log(queryStr);
+    query.then(function(result) {
+        res.json(result);
+    }).fail(function() {
+        res.json({
+            success: 'no'
+        });
+    });
+});
+
 app.get('/filters', ensureAuthenticated, function(req, res) {
     console.log(req.user.id, req.query.entity)
     var query = pool.query('SELECT id,filter FROM filters WHERE idUser=? AND entity=?', [req.user.id, req.query.entity]);
@@ -169,7 +184,7 @@ app.get('/filters', ensureAuthenticated, function(req, res) {
         res.json({
             success: 'no'
         });
-    })
+    });
 });
 
 app.post('/filters', ensureAuthenticated, function(req, res) {

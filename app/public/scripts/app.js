@@ -1,7 +1,7 @@
 'use strict';
 
 google.setOnLoadCallback(function() {
-    angular.bootstrap(document.body, ['publicApp', 'ngResource']);
+    angular.bootstrap(document.body, ['publicApp', 'ngResource','ui.bootstrap']);
 });
 
 google.load('visualization', '1', {

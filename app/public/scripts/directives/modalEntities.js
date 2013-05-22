@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('publicApp')
-    .directive('modalEntities', function($compile) {
+    .directive('modalEntities', function($compile,$http) {
     return {
         scope: {
             idModal: '@',
@@ -27,7 +27,7 @@ angular.module('publicApp')
             '<select ng-model="line[$index].operator" ng-options="operator for operator in operators" class="operator">',
             '<option value="">-- operator --</option>',
             '</select>',
-            '<input type="text" ng-model="line[$index].value"/>',
+            '<input type="text" ng-model="line[$index].value"  typeahead="choice.nerdType for choice in choices | filter:$viewValue "/>',
             '<a href="" class="modal-remove-line" ng-click="removeFilter($parent.$index,$index)">x</a></li>',
             '</ul></div>',
             '</div><div class="modal-footer">',
@@ -43,6 +43,9 @@ angular.module('publicApp')
             scope.operators = ['=', '>', '<'];
             scope.lines = angular.copy(scope.dataset.filters);
 
+            $http({method: 'GET', url: '/autocomplete',params: {table: 'entity',column: 'nerdType'} }).success(function(data, status, headers, config) {
+            scope.choices = data;
+            });
             scope.save = function() {
                 dataSet = angular.copy(scope.lines);
                 scope.changeDataSet({
