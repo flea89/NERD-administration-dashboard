@@ -3,7 +3,7 @@
  */
 'use strict';
 var pool = require('./../config/mysql.js');
-var Q = require('Q');
+var Q = require('q');
 
 function timeHandler(req, res) {
     var timeAggregator = {
@@ -12,13 +12,13 @@ function timeHandler(req, res) {
         month: ' GROUP BY YEAR(tokenTimeStamp),MONTH(tokenTimeStamp)',
         all: ' GROUP BY YEAR(tokenTimeStamp)'
     },
-    selectDateFunction = {
-        day: 'YEAR(tokenTimeStamp) AS year, MONTH(tokenTimeStamp) AS month, DAY(tokenTimeStamp) AS day',
-        week: 'YEAR(tokenTimeStamp) AS year, WEEK(tokenTimeStamp) AS week',
-        month: 'YEAR(tokenTimeStamp) AS year, MONTH(tokenTimeStamp) AS month',
-        all: 'YEAR(tokenTimeStamp) AS year'
-    },
-    filter, query, groupByFilter = '',
+        selectDateFunction = {
+            day: 'YEAR(tokenTimeStamp) AS year, MONTH(tokenTimeStamp) AS month, DAY(tokenTimeStamp) AS day',
+            week: 'YEAR(tokenTimeStamp) AS year, WEEK(tokenTimeStamp) AS week',
+            month: 'YEAR(tokenTimeStamp) AS year, MONTH(tokenTimeStamp) AS month',
+            all: 'YEAR(tokenTimeStamp) AS year'
+        },
+        filter, query, groupByFilter = '',
         filters = req.query.filters,
         reqTimeAggragator = req.query.timeAggregator;
 
@@ -60,7 +60,7 @@ function timeHandler(req, res) {
 
 function groupByHandler(req, res) {
     var filter, query,
-    groupBy = req.query.groupBy;
+        groupBy = req.query.groupBy;
     // console.log(groupBy);
     // switch (filterType) {
     //     case undefined:

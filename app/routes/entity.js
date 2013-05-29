@@ -3,7 +3,7 @@
  */
 'use strict';
 var pool = require('./../config/mysql.js');
-var Q = require('Q');
+var Q = require('q');
 
 function timeHandler(req, res) {
 	var timeAggregator = {
@@ -12,13 +12,13 @@ function timeHandler(req, res) {
 		month: ' GROUP BY YEAR(timestamp),MONTH(timestamp)',
 		all: ' GROUP BY YEAR(timestamp)'
 	},
-	selectDateFunction = {
-		day: 'YEAR(timestamp) AS year, MONTH(timestamp) AS month, DAY(timestamp) AS day',
-		week: 'YEAR(timestamp) AS year, WEEK(timestamp) AS week',
-		month: 'YEAR(timestamp) AS year, MONTH(timestamp) AS month',
-		all: 'YEAR(timestamp) AS year'
-	},
-	filter, query, groupByFilter = '',
+		selectDateFunction = {
+			day: 'YEAR(timestamp) AS year, MONTH(timestamp) AS month, DAY(timestamp) AS day',
+			week: 'YEAR(timestamp) AS year, WEEK(timestamp) AS week',
+			month: 'YEAR(timestamp) AS year, MONTH(timestamp) AS month',
+			all: 'YEAR(timestamp) AS year'
+		},
+		filter, query, groupByFilter = '',
 		nestedQuery = false,
 		filters = req.query.filters,
 		reqTimeAggragator = req.query.timeAggregator;

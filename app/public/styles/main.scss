@@ -337,7 +337,20 @@ text-shadow: 0px 1px 0px #fff;
     }
 }
 
+#loginForm{
+    z-index: 100;
+}
 
+ul.typeahead.dropdown-menu{
+    width: 543px !important;
+    margin-left: -40px !important;   
+}
+
+div.modal-body{
+    input{
+        text-align:right;
+    }
+}
 
 
 

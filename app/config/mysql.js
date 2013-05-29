@@ -1,7 +1,7 @@
 'use strict';
 
 var mysql = require('mysql');
-var Q = require('Q');
+var Q = require('q');
 var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
