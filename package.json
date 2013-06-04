@@ -30,7 +30,7 @@
         "matchdep": "~0.1.1",
         "grunt-google-cdn": "~0.1.0",
         "grunt-ngmin": "~0.0.1",
-        "grunt-express": "*",
+        "grunt-express": "git://github.com/flea89/grunt-express.git",
         "grunt-rerun": "0.0.2",
         "mysql": "2.0.0-alpha7"
     },
