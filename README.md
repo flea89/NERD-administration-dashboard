@@ -1,30 +1,36 @@
 # Nerd Dashboard #
-This is a Single Page Application developed with AnguarJS (client side javascript framework) and a node.js and Express for the server.
+This is a Single Page Application developed with AnguarJS (client side javascript framework) and a node.js plus Express for the server.
 Basically the server initially serves the files required by AngularJS to bootstrap the application and, after this first interaction, the communication between the tiers is made with REST APIS.
 
 ## Development ##
 Nerd Dashboard has been developed using a few cool tools that make the developer life easier.
 Unfortunately this requires a bit of initial configuration but will help a lot in the daily development work. Unfortunately there was a little time to setting up the environment and therefore there are only some features implemented.
-One of the first tool to be aware of is <strong>Grunt</strong> which is a Javascript Task Runner. Grunt. Grunt allows to automate repetitive tasks like minification, compilation, unit testing, linting, etc, the easier your job becomes.
-Another tool intensively exploited is Compass, a CSS Authoring Framework built on Sass ( an extension of CSS3 which adds nested rules, variables, mixins, selector inheritance).
-I also strongly suggest to use Yeoman 1.0 :<CITE>a collection of tools and best practices working in harmony to make developing for the web even better</CITE>. Actually Yeoman could be considered a workflow that comprise three tools : yo (the scaffolding tool), grunt (the build tool) and bower (for package management).
+
+One of the first tool to be aware of is <strong>Grunt</strong> which is a Javascript Task Runner. Grunt allows to automate repetitive tasks like minification, compilation, unit testing, linting, etc, the easier your job becomes.
+To have an overview of Grunt and to understand how it works you can find a lot of resources on [gruntjs.com/](http://gruntjs.com/)
+
+Another tool intensively exploited is <strong>Compass</strong>, a CSS Authoring Framework built on Sass ( an extension of CSS3 which adds nested rules, variables, mixins, selector inheritance).
+
+I also strongly suggest to use <strong>Yeoman 1.0</strong> :<CITE>a collection of tools and best practices working in harmony to make developing for the web even better</CITE>. Actually Yeoman could be considered a workflow that comprise three tools : yo (the scaffolding tool), grunt (the build tool) and bower (for package management).
 As we can see we already talked about Grunt, so the last tools we have to talk about are yo and bower.
+
 The first allows to scaffolds out a new application, writing your Grunt configuration and pulling in relevant Grunt tasks that you might need for your build ( in our case allowed to first scaffold an AngularJS application, write the Gruntfile and moreover allows with a simple instruction to scaffold new view, controllers, services for the web application).
-Bower is another great tool and allows to easily face the front-end package management: it is basically a package manager for the web.
+<strong>Bower</strong> is another great tool and allows to easily face the front-end package management: it is basically a package manager for the web.
 Given this brief overview we can describe how to built our development workflow.
 
 ### Development workflow ###
 Once you have this repository locally, of course, you need nodejs and Git, plus Ruby and Compass installed on your machine.
-Then you need to install <strong>Grunt</strong>:
+Then you need to install <strong>Yeoman</strong> with <strong>Grunt</strong> and <strong>Bower</strong>:
+This will install the recommended tools globally.
 ```shell
 npm install -g yo grunt-cli bower
 ```
-This will install the recommended tools globally.
+
 Then you need to install angular-generator
 ```shell
 npm install -g generator-angular
 ```
-You can have an overview on how this generator works on [angular-seed](https://github.com/yeoman/generator-angular/)
+You can have an overview on how this generator works on [angular-generator](https://github.com/yeoman/generator-angular/)
 
 Now that you have all this stuff installed on your workstation, inside the root of the project launch:
 
